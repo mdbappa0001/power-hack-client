@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useBilling = (page, text) => {
+const useBilling = (page, text, refetch) => {
     const [billings, setBillings] = useState([])
     useEffect(() => {
         fetch(`http://localhost:5000/billing-list?page=${page}&search=${text}`)
@@ -8,7 +8,7 @@ const useBilling = (page, text) => {
             .then(result => {
                 setBillings(result.result)
             })
-    }, [page, text])
+    }, [page, text, refetch])
     return [billings]
 }
 export default useBilling;

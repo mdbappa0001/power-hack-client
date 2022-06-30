@@ -5,10 +5,11 @@ import DeleteBillModal from './DeleteBillModal';
 const BillingRow = ({ add, setAdd, billing }) => {
     const [confirmDelete, setConfirmDelete] = useState(false)
     const { email, amount, phone, fullName, _id } = billing;
+
     return (<>
         <tr class="border-b odd:bg-white even:bg-gray-50 font-medium text-gray-600">
             <td class="px-6 py-4 ">
-                {_id}
+                {_id ? _id : "Generating Id..."}
             </td>
             <td class="px-6 py-4">
                 {fullName}
@@ -32,7 +33,7 @@ const BillingRow = ({ add, setAdd, billing }) => {
             add && <BillingModal />
         }
         {
-            confirmDelete && <DeleteBillModal setConfirmDelete={setConfirmDelete} confirmDelete={confirmDelete} />
+            confirmDelete && <DeleteBillModal setConfirmDelete={setConfirmDelete} id={_id} confirmDelete={confirmDelete} />
         }
 
     </>
