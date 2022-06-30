@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AddBillingHeader from './AddBillingHeader';
+import BillingTable from './BillingTable';
 
 const Billing = () => {
+    const [add, setAdd] = useState(false)
     return (
-        <div>
-            <h2>This is for billing</h2>
-        </div>
+        <>
+            <AddBillingHeader add={add} setAdd={setAdd} />
+            <BillingTable add={add} setAdd={setAdd} />
+        </>
     );
 };
 
