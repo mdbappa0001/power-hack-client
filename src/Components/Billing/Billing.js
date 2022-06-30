@@ -22,6 +22,7 @@ const Billing = () => {
     }, [])
 
     const handelSubmit = (e) => {
+        console.log(e)
         e.preventDefault()
         const email = e.target.floating_email.value;
         const amount = e.target.floating_amount.value;
@@ -46,9 +47,11 @@ const Billing = () => {
                     setAdd(!add)
                 }
             })
-
-
     }
+
+
+
+
     return (
         <>
             <AddBillingHeader
@@ -56,14 +59,18 @@ const Billing = () => {
                 setAdd={setAdd}
                 handelSubmit={handelSubmit}
 
+
             />
-            <BillingTable add={add} setAdd={setAdd}
+            <BillingTable
+                setRefetch={setRefetch}
+                refetch={refetch}
                 billings={billings}
                 pages={pages}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 newAdded={newAdded}
                 loading={loading}
+
             />
         </>
     );

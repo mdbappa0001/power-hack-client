@@ -1,7 +1,7 @@
 import React from 'react';
 import BillingRow from './BillingRow';
 
-const BillingTable = ({ add, setAdd, setCurrentPage, currentPage, pages, billings, newAdded, loading }) => {
+const BillingTable = ({ setCurrentPage, currentPage, pages, billings, newAdded, loading, refetch, setRefetch }) => {
 
 
     const temporary = [...billings, newAdded]
@@ -10,7 +10,7 @@ const BillingTable = ({ add, setAdd, setCurrentPage, currentPage, pages, billing
         <>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-20 mt-6">
                 <table class="w-full text-sm text-left text-gray-500 cursor-default">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
+                    <thead class="text-xs text-black uppercase bg-gray-400  ">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 Billing Id
@@ -35,11 +35,12 @@ const BillingTable = ({ add, setAdd, setCurrentPage, currentPage, pages, billing
                     <tbody>
                         {
                             !loading &&
-                            billings?.map(billing => <BillingRow billing={billing} key={billing._id} add={add} setAdd={setAdd} />)
+                            billings?.map(billing => <BillingRow billing={billing} key={billing._id} setRefetch={setRefetch}
+                                refetch={refetch} />)
 
                         }
                         {
-                            loading && temporary?.map(billing => <BillingRow billing={billing} key={billing._id} add={add} setAdd={setAdd} />)
+                            loading && temporary?.map(billing => <BillingRow billing={billing} key={billing._id} />)
                         }
 
 

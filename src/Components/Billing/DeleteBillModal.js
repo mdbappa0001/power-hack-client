@@ -1,6 +1,7 @@
 import React from 'react';
 
-const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id }) => {
+const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id, refetch, setRefetch }) => {
+    console.log('delete')
     const handelDelete = (id) => {
         fetch(`http://localhost:5000/delete-billing/${id}`, {
             method: 'DELETE',
@@ -11,8 +12,8 @@ const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
+                    setRefetch(!refetch)
 
-                    console.log(data)
                 }
             })
         setConfirmDelete(!confirmDelete)
@@ -22,12 +23,12 @@ const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id }) => {
             {/* <!-- Put this part before </body> tag --> */}
             <input type="checkbox" id="delete-modal" class="modal-toggle" />
             <div class="modal">
-                <div class="modal-box rounded-none">
-                    <h1 className='text-center text-error font-semibold text-2xl'> Warning!!!</h1>
-                    <p className='font-semibold my-10'>Are you sure want to delete <span className='font-black text-error'> {id}</span> billing Info?</p>
+                <div class="modal-box rounded-32 w-96">
+                    <h1 className='text-center text-red-700 font-bold text-2xl'> Alert !!!</h1>
+                    <p className='font-semibold my-10 text-black'>Are you sure want to delete <span className='font-black text-red-500'> {id}</span> billing Info?</p>
                     <div className='flex justify-between'>
                         <button className='btn btn-error btn-sm text-white' onClick={() => handelDelete(id)}>Delete</button>
-                        <button className='btn btn-sm' onClick={() => setConfirmDelete(!confirmDelete)}>Close</button>
+                        <button className='btn btn-primary btn-sm' onClick={() => setConfirmDelete(!confirmDelete)}>Close</button>
 
                     </div>
 
