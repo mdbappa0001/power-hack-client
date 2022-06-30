@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import useBilling from '../../Hooks/useBilling';
+import React from 'react';
 import BillingRow from './BillingRow';
 
-const BillingTable = ({ add, setAdd }) => {
+const BillingTable = ({ add, setAdd, setCurrentPage, currentPage, pages, billings }) => {
 
 
-    const [currentPage, setCurrentPage] = useState(0)
-    const [billings] = useBilling(currentPage)
-    const [count, setCount] = useState(0)
-    const pages = Math.ceil(count / 10);
-    useEffect(() => {
-        fetch('http://localhost:5000/billingCount')
-            .then(res => res.json())
-            .then(result => {
-                setCount(result.count)
-            })
-    }, [])
+
     return (
 
         <>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-20 mt-6">
                 <table class="w-full text-sm text-left text-gray-500 cursor-default">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
+                    <thead class=" bg-gray-400 text-black ">
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 Billing Id
@@ -45,7 +34,7 @@ const BillingTable = ({ add, setAdd }) => {
                     </thead>
                     <tbody>
                         {
-                            billings.reverse().map(billing => <BillingRow billing={billing} key={billing._id} add={add} setAdd={setAdd} />)
+                            billings?.reverse().map(billing => <BillingRow billing={billing} key={billing._id} add={add} setAdd={setAdd} />)
                         }
                     </tbody>
                 </table>
