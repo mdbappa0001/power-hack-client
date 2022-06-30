@@ -1,42 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useBilling from '../../Hooks/useBilling';
 import BillingRow from './BillingRow';
 
 const BillingTable = ({ add, setAdd }) => {
 
+
+    const [currentPage, setCurrentPage] = useState(0)
+    const [billings] = useBilling(currentPage)
+    const [count, setCount] = useState(0)
+    const pages = Math.ceil(count / 10);
+    useEffect(() => {
+        fetch('http://localhost:5000/billingCount')
+            .then(res => res.json())
+            .then(result => {
+                setCount(result.count)
+            })
+    }, [])
     return (
 
+        <>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-20 mt-6">
+                <table class="w-full text-sm text-left text-gray-500 cursor-default">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Billing Id
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Full Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Email
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Phone
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Paid Amount
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            billings.reverse().map(billing => <BillingRow billing={billing} key={billing._id} add={add} setAdd={setAdd} />)
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div className='text-center my-5'>
+                {
+                    [...Array(pages).keys()].map(num => <button key={num} className={currentPage === num ? "btn btn-xs bg-green-900 rounded-none mx-1" : "btn btn-xs rounded-none mx-1"}
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-20 mt-6">
-            <table class="w-full text-sm text-left text-gray-500 cursor-default">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-300  ">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Billing Id
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Full Name
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Email
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Phone
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Paid Amount
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <BillingRow add={add} setAdd={setAdd} />
+                        onClick={() => setCurrentPage(num)}
+                    >{num + 1}</button>)
+                }
+            </div>
+        </>
 
-
-                </tbody>
-            </table>
-        </div>
 
 
     );

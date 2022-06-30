@@ -2,24 +2,25 @@ import React, { useState } from 'react';
 import BillingModal from './BillingModal';
 import DeleteBillModal from './DeleteBillModal';
 
-const BillingRow = ({ add, setAdd }) => {
+const BillingRow = ({ add, setAdd, billing }) => {
     const [confirmDelete, setConfirmDelete] = useState(false)
+    const { email, amount, phone, fullName, _id } = billing;
     return (<>
         <tr class="border-b odd:bg-white even:bg-gray-50 font-medium text-gray-600">
             <td class="px-6 py-4 ">
-                1536217262792732
+                {_id}
             </td>
             <td class="px-6 py-4">
-               Sayem Rahman
+                {fullName}
             </td>
             <td class="px-6 py-4">
-                sayem@gmail.com
+                {email}
             </td>
             <td class="px-6 py-4">
-                01521536417
+                {phone}
             </td>
             <td class="px-6 py-4">
-                500
+                {amount}
             </td>
             <td class="px-6 py-4">
                 <label for="add-modal" className='text-green-800 cursor-pointer' onClick={() => setAdd(!add)}>Edit</label>
@@ -33,6 +34,7 @@ const BillingRow = ({ add, setAdd }) => {
         {
             confirmDelete && <DeleteBillModal setConfirmDelete={setConfirmDelete} confirmDelete={confirmDelete} />
         }
+
     </>
 
     );
