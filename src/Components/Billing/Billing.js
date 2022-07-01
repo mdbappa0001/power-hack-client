@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import useBilling from '../../Hooks/useBilling';
 import AddBillingHeader from './AddBillingHeader';
 import BillingTable from './BillingTable';
+import { toast } from 'react-toastify';
+const Billing = ({ count, setCount, refetch, setRefetch }) => {
 
-const Billing = ({ count, setCount }) => {
-    const [refetch, setRefetch] = useState(0)
     const [add, setAdd] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
-    const [billings] = useBilling(currentPage, refetch)
-    console.log(count)
+
+    const [text, setText] = useState('')
     const pages = Math.ceil(count / 10);
     const [newAdded, setNewAdded] = useState({})
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
-
-
+    console.log(text)
+    const [billings] = useBilling(currentPage, text, refetch)
     const handelSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
@@ -41,6 +41,8 @@ const Billing = ({ count, setCount }) => {
                 if (res.status === 401 || res.status === 403) {
                     navigate('/login');
                     localStorage.removeItem('accessToken');
+
+                    toast.error("Logged out, Login Again!!")
                 }
                 return res.json()
             })
@@ -62,6 +64,7 @@ const Billing = ({ count, setCount }) => {
                 add={add}
                 setAdd={setAdd}
                 handelSubmit={handelSubmit}
+                setText={setText}
 
 
             />

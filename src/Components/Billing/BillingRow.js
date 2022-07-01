@@ -8,7 +8,7 @@ const BillingRow = ({ billing, refetch, setRefetch }) => {
     const [update, setUpdate] = useState(false)
 
     return (<>
-        <tr className="border-b odd:bg-gray-100 even:bg-gray-200 font-medium text-gray-600">
+        <tr className="border-b odd:bg-gray-300 even:bg-gray-300 font-medium text-gray-600">
             <td className="px-6 py-4 ">
                 {_id ? _id : "Generating New Id..."}
             </td>

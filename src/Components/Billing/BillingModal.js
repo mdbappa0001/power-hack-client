@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
-
+import { toast } from 'react-toastify';
 const BillingModal = ({ add, setAdd, handelSubmit, setUpdate, update, id, refetch, setRefetch }) => {
     const navigate = useNavigate()
     const handelUpdate = (event) => {
@@ -20,20 +19,21 @@ const BillingModal = ({ add, setAdd, handelSubmit, setUpdate, update, id, refetc
             body: JSON.stringify(newBill),
 
         })
-        .then(res => {
-            if (res.status === 401 || res.status === 403) {
-                navigate('/login');
-                localStorage.removeItem('accessToken');
-            }
-            return res.json()
-        })
-        .then(data => {
-            if (data.acknowledged) {
-                console.log(data)
-                setRefetch(!refetch)
-                setUpdate(!update)
-            }
-        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    navigate('/login');
+                    localStorage.removeItem('accessToken');
+                    toast.error("Forbidden")
+                }
+                return res.json()
+            })
+            .then(data => {
+                if (data.acknowledged) {
+                    console.log(data)
+                    setRefetch(!refetch)
+                    setUpdate(!update)
+                }
+            })
     }
 
     return (
@@ -43,7 +43,7 @@ const BillingModal = ({ add, setAdd, handelSubmit, setUpdate, update, id, refetc
             <div className="modal">
                 <div className="modal-box rounded-32 w-96">
                     <h1 className='text-center text-red-700 font-bold text-2xl'>Add / Update Bill</h1>
-                    {/* form start ------------------------------------------------------------------------ */}
+               
                     {
                         add ?
 
@@ -102,7 +102,7 @@ const BillingModal = ({ add, setAdd, handelSubmit, setUpdate, update, id, refetc
                     }
 
 
-                    {/* form end ------------------------------------------------------------------------ */}
+                
 
 
                 </div>

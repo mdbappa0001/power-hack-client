@@ -49,7 +49,7 @@ const BillingTable = ({ setCurrentPage, currentPage, pages, billings, newAdded, 
             </div>
             <div className='text-center my-5'>
                 {
-                    [...Array(pages).keys()].map(num => <button key={num} className={currentPage === num ? "btn btn-xs bg-green-900 rounded-none mx-1" : "btn btn-xs rounded-none mx-1"}
+                    [...Array(pages).keys()].map(num => <button key={num} className={currentPage === num ? "btn btn-xs bg-blue-700 rounded mx-1" : "btn btn-xs rounded-none mx-1"}
 
                         onClick={() => setCurrentPage(num)}
                     >{num + 1}</button>)

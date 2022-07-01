@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id, refetch, setRefetch }) => {
     const navigate = useNavigate()
@@ -15,6 +16,7 @@ const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id, refetch, setRefe
             if (res.status === 401 || res.status === 403) {
                 navigate('/login');
                 localStorage.removeItem('accessToken');
+                toast.error("Forbidden")
             }
             return res.json()
         })

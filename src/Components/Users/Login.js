@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 const Login = () => {
     const navigate = useNavigate()
@@ -25,6 +26,7 @@ const Login = () => {
                     const accessToken = data.token;
                     localStorage.setItem('accessToken', accessToken);
                     navigate(from, { replace: true });
+                    toast.success('SuccessFully Logged In');
                 }
                 else {
                     console.log(data)
@@ -35,7 +37,7 @@ const Login = () => {
     return (
         <section className='w-96 rounded-32 mx-auto mt-40'>
             <div>
-                <h2 className='text-2xl text-red-700 font-bold mb-5'>Login</h2>
+                <h2 className='text-2xl text-black font-bold mb-5'>Login</h2>
                 <form onSubmit={loginUser}>
                     <div className="relative z-0 w-full mb-4 group">
                         <input type="email" name="floating_email" placeholder="Email Address" className="input input-bordered input-error w-96" required /><br />
@@ -44,7 +46,7 @@ const Login = () => {
                         <input type="password" name="floating_password" placeholder="Password" className="input input-bordered input-error w-96" required /><br />
                     </div>
                     <small className='my-5'>New Here?? <Link to='/register' className='text-blue-800'>Please Register</Link> </small>
-                    <input type="submit" value="Login" className="text-white bg-red-700 hover:bg-black hover:text-white focus:ring-4 focus:outline-none  font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center " />
+                    <input type="submit" value="Login" className="text-white bg-red-700 hover:bg-black hover:text-white focus:ring-4 focus:outline-none  font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center rounded" />
                 </form>
             </div>
 
