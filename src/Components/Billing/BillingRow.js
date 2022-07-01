@@ -10,7 +10,7 @@ const BillingRow = ({ billing, refetch, setRefetch }) => {
     return (<>
         <tr class="border-b odd:bg-gray-100 even:bg-gray-200 font-medium text-gray-600">
             <td class="px-6 py-4 ">
-                {_id ? _id : "Generating Id..."}
+                {_id ? _id : "Generating New Id..."}
             </td>
             <td class="px-6 py-4">
                 {fullName}
