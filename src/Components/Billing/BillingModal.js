@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const BillingModal = ({ add, setAdd, handelSubmit, setUpdate, update, id, refetch, setRefetch }) => {
-
+    const navigate = useNavigate()
     const handelUpdate = (event) => {
         event.preventDefault()
         const email = event.target.floating_email.value;
@@ -13,18 +15,25 @@ const BillingModal = ({ add, setAdd, handelSubmit, setUpdate, update, id, refetc
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(newBill),
 
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.acknowledged) {
-                    console.log(data)
-                    setRefetch(!refetch)
-                    setUpdate(!update)
-                }
-            })
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                navigate('/login');
+                localStorage.removeItem('accessToken');
+            }
+            return res.json()
+        })
+        .then(data => {
+            if (data.acknowledged) {
+                console.log(data)
+                setRefetch(!refetch)
+                setUpdate(!update)
+            }
+        })
     }
 
     return (

@@ -1,21 +1,29 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id, refetch, setRefetch }) => {
-    console.log('delete')
+    const navigate = useNavigate()
     const handelDelete = (id) => {
         fetch(`https://demo-deploy-app-50.herokuapp.com/delete-billing/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             },
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount > 0) {
-                    setRefetch(!refetch)
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                navigate('/login');
+                localStorage.removeItem('accessToken');
+            }
+            return res.json()
+        })
+        .then(data => {
+            if (data.deletedCount > 0) {
+                setRefetch(!refetch)
 
-                }
-            })
+            }
+        })
         setConfirmDelete(!confirmDelete)
     }
     return (
