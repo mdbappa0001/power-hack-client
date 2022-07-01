@@ -3,7 +3,7 @@ import React from 'react';
 const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id, refetch, setRefetch }) => {
     console.log('delete')
     const handelDelete = (id) => {
-        fetch(`http://localhost:5000/delete-billing/${id}`, {
+        fetch(`https://demo-deploy-app-50.herokuapp.com/delete-billing/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
@@ -21,9 +21,9 @@ const DeleteBillModal = ({ confirmDelete, setConfirmDelete, id, refetch, setRefe
     return (
         <div>
             {/* <!-- Put this part before </body> tag --> */}
-            <input type="checkbox" id="delete-modal" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box rounded-32 w-96">
+            <input type="checkbox" id="delete-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box rounded-32 w-96">
                     <h1 className='text-center text-red-700 font-bold text-2xl'> Alert !!!</h1>
                     <p className='font-semibold my-10 text-black'>Are you sure want to delete <span className='font-black text-red-500'> {id}</span> billing Info?</p>
                     <div className='flex justify-between'>

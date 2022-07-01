@@ -8,7 +8,7 @@ const Login = () => {
         const password = e.target.floating_password.value;
         const user = { email, password };
 
-        fetch(`http://localhost:5000/login`, {
+        fetch(`https://demo-deploy-app-50.herokuapp.com/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const Login = () => {
                         <input type="email" name="floating_email" placeholder="Email Address" className="input input-bordered input-error w-96" required /><br />
                     </div>
                     <div className="relative z-0 w-full mb-8 group">
-                    <input type="password" name="floating_password"  placeholder="Password" className="input input-bordered input-error w-96" required /><br />
+                        <input type="password" name="floating_password" placeholder="Password" className="input input-bordered input-error w-96" required /><br />
                     </div>
                     <small className='my-5'>New Here?? <Link to='/register' className='text-blue-800'>Please Register</Link> </small>
                     <input type="submit" value="Login" className="text-white bg-red-700 hover:bg-black hover:text-white focus:ring-4 focus:outline-none  font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center " />

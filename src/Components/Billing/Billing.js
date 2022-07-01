@@ -14,7 +14,7 @@ const Billing = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:5000/billingCount')
+        fetch('https://demo-deploy-app-50.herokuapp.com/billingCount')
             .then(res => res.json())
             .then(result => {
                 setCount(result.count)
@@ -31,7 +31,7 @@ const Billing = () => {
         const newBill = { email, amount, phone, fullName }
         setNewAdded(newBill)
         setLoading(true)
-        fetch('http://localhost:5000/add-billing', {
+        fetch('https://demo-deploy-app-50.herokuapp.com/add-billing', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

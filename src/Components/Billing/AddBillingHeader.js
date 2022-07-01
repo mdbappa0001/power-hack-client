@@ -10,7 +10,7 @@ const AddBillingHeader = ({ add, setAdd, handelSubmit }) => {
                     <form className='inline pl-5'> <input type="text" name='searched' className='border border-gray-500 bg-transparent focus:outline-0 placeholder:text-gray-900 px-2 rounded' placeholder='Search here' /></form>
                 </div>
                 <div>
-                    {/* <label class="btn modal-button">open modal</label> */}
+               
                     <label for="add-modal" className='text-white bg-black rounded px-2 py-1' onClick={() => setAdd(!add)}>Add New Bill</label>
                 </div>
             </div>

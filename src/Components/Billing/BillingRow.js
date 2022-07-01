@@ -8,23 +8,23 @@ const BillingRow = ({ billing, refetch, setRefetch }) => {
     const [update, setUpdate] = useState(false)
 
     return (<>
-        <tr class="border-b odd:bg-gray-100 even:bg-gray-200 font-medium text-gray-600">
-            <td class="px-6 py-4 ">
+        <tr className="border-b odd:bg-gray-100 even:bg-gray-200 font-medium text-gray-600">
+            <td className="px-6 py-4 ">
                 {_id ? _id : "Generating New Id..."}
             </td>
-            <td class="px-6 py-4">
+            <td className="px-6 py-4">
                 {fullName}
             </td>
-            <td class="px-6 py-4">
+            <td className="px-6 py-4">
                 {email}
             </td>
-            <td class="px-6 py-4">
+            <td className="px-6 py-4">
                 {phone}
             </td>
-            <td class="px-6 py-4">
+            <td className="px-6 py-4">
                 {amount}
             </td>
-            <td class="px-6 py-4">
+            <td className="px-6 py-4">
                 <label for="add-modal" className='text-green-800 cursor-pointer' onClick={() => setUpdate(!update)}>Edit</label>
                 <span className='mx-2'>|</span>
                 <label for="delete-modal" className='text-red-900 cursor-pointer' onClick={() => setConfirmDelete(!confirmDelete)}>Delete</label>
